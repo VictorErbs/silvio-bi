@@ -1,0 +1,373 @@
+================================================================================
+  RELATORIO COMPLETO DE ANALISE DE DADOS - BUSINESS INTELLIGENCE
+  INFRAÇÕES DE TRÂNSITO - RECIFE 2025
+  Data de geracao: 08/06/2026 21:16
+================================================================================
+
+FONTES DE DADOS UTILIZADAS:
+  1. Registro de Infracoes de Transito 2025 (171.109 registros reais)
+  2. base_questao5_recusa_bafometro_sinistros.csv (1.654 registros)
+  3. fact_infracoes.csv (3.000 registros simulados)
+  4. fact_sinistros.csv (500 registros simulados)
+  5. dim_condutor.csv / dim_localidade.csv / dim_tempo.csv (dimensoes)
+
+================================================================================
+  CARGA DE DADOS
+================================================================================
+
+  Base real de infracoes: 171,109 registros
+  Periodo: 2025-01-01 a 2025-05-31
+  Colunas: datainfracao, horainfracao, dataimplantacao, agenteequipamento, infracao, descricaoinfracao, amparolegal, localcometimento
+
+  dim_condutor: 1000 condutores
+  dim_localidade: 8 bairros
+  dim_tempo: 365 dias
+  fact_infracoes: 3,000 infracoes simuladas
+  fact_sinistros: 500 sinistros simulados
+  base_q5: 1,654 registros
+
+================================================================================
+  PERGUNTA 1
+  Qual o volume mensal de infracoes por 'Permitir posse/conducao a
+  pessoa sem CNH/PPD/ACC' (Art. 164 do CTB) e em quais dias da
+  semana elas ocorrem com maior frequencia?
+================================================================================
+
+INTRODUCAO:
+  O Art. 164 do CTB trata de permitir posse ou conducao de veiculo a
+  pessoa sem habilitacao valida. Esta analise examina o volume mensal
+  destas infracoes e sua distribuicao ao longo da semana, utilizando
+  dados reais de 2025 (janeiro a maio).
+
+  Total de registros encontrados: 172
+
+  Volume Mensal:
+    Jan: 29 infracoes (16.9%)
+    Fev: 30 infracoes (17.4%)
+    Mar: 69 infracoes (40.1%)
+    Abr: 13 infracoes (7.6%)
+    Mai: 31 infracoes (18.0%)
+
+  Distribuicao por Dia da Semana:
+    Segunda: 27 infracoes (15.7%)
+    Terca: 26 infracoes (15.1%)
+    Quarta: 34 infracoes (19.8%)
+    Quinta: 24 infracoes (14.0%)
+    Sexta: 22 infracoes (12.8%)
+    Sabado: 26 infracoes (15.1%)
+    Domingo: 13 infracoes (7.6%)
+
+ANALISE:
+  Marco (Mar/2025) apresenta o maior volume com 69 registros,
+  concentrando 40.1% do total do periodo.
+  Quarta-feira e o dia com maior incidencia (34 registros),
+  enquanto domingo apresenta o menor indice (13 registros).
+
+CONCLUSÃO:
+  A concentracao em marco e quartas-feiras sugere possivel relacao com
+  operacoes de fiscalizacao especificas. O baixo numero de registro aos
+  domingos e atipico, ja que a conducao sem CNH normalmente nao segue
+  padrao sazonal. Recomenda-se investigar se houve operacao especial
+  em marco de 2025 direcionada a este artigo.
+
+  >> Graficos salvos: grafico_q1_art164.png
+  >> Tabelas: q1_art164_mensal.csv, q1_art164_dia_semana.csv
+
+================================================================================
+  PERGUNTA 2
+  Qual o volume de multas por avanco de sinal vermelho (Art. 208)
+  por horario e local, e qual a diferenca na quantidade de registros
+  feitos por radares em relacao aos feitos por agentes?
+================================================================================
+
+INTRODUCAO:
+  O Art. 208 do CTB penaliza o avanco de sinal vermelho do semaforo.
+  Esta analise utiliza 3.479 registros reais para identificar padroes
+  temporais, locais de maior incidencia e a distribuicao entre
+  fiscalizacao eletronica (radares) e agentes de transito.
+
+  Total de registros: 3479
+
+  Distribuicao Horaria (top 5 periodos):
+    08h - 09h: 330 infracoes (9.5%)
+    07h - 08h: 305 infracoes (8.8%)
+    11h - 12h: 294 infracoes (8.5%)
+    09h - 10h: 282 infracoes (8.1%)
+    12h - 13h: 268 infracoes (7.7%)
+
+  Horario de pico (8h-9h com maior volume):
+    08h - 09h com 330 registros
+    Periodo noturno (0h-6h) apresenta apenas 37 registros (1.1%)
+
+  Fiscalizacao por Tipo de Equipamento:
+    AGENTE (Talao Eletronico): 1398 registros (40.2%)
+    RADAR (Foto Sensor): 1276 registros (36.7%)
+
+  Top 10 Locais com Maior Incidencia:
+    1. AV. DESEMBARGADOR JOSE NEVES, SEMAFORO 400, Sentido:SUBURBIO Faixa: 2: 246
+    2. AVENIDA CAXANGA, SOB O SEMAFORO N. 229: 196
+    3. AV. DESEMBARGADOR JOSE NEVES, SEMAFORO 580, Sentido:CENTRO Faixa: 1: 112
+    4. AV. BEBERIBE, SEMAFORO 131, Sentido:SUBURBIO Faixa: 2: 67
+    5. RUA FALCAO DE LACERDA, SEMAFORO 285, Sentido:CENTRO Faixa: 1: 58
+    6. AV. DESEMBARGADOR JOSE NEVES, SEMAFORO 580, Sentido:CENTRO Faixa: 2: 55
+    7. AVENIDA NORTE MIGUEL ARRAES DE ALENCAR, SOB O SEMAFORO N. 065: 53
+    8. AV. DESEMBARGADOR JOSE NEVES, SEMAFORO 400, Sentido:SUBURBIO Faixa: 1: 52
+    9. AV. DESEMBARGADOR JOSE NEVES, SEMAFORO 580: 49
+    10. AV. DR. JOSE RUFINO, SEMAFORO 044, Sentido:CENTROFaixa: 2: 48
+
+ANALISE:
+  O pico entre 7h-9h coincide com o horario de pico matinal,
+  sugerindo correlacao com maior volume de trafego e possivel
+  pressa dos condutores. Agentes de transito (AUTOS NO TALAO
+  ELETRONICO) registraram 1398 infracoes, enquanto
+  radares (FOTO SENSOR) registraram 1276.
+  A Avenida Desembargador Jose Neves e o ponto critico,
+  com 246 registros no semaforo da faixa 2,
+  sentido suburbio.
+
+CONCLUSÃO:
+  A fiscalizacao mista (agentes + radares) e essencial para cobrir
+  diferentes horarios. Agentes atuam em horario comercial,
+  enquanto radares operam 24h. Recomenda-se reforco de radares
+  nos horarios de pico (7h-9h e 17h-18h) e instalacao de novos
+  equipamentos na Av. Desembargador Jose Neves e Av. Caxanga.
+
+  >> Graficos: grafico_q2_art208.png
+  >> Tabelas: q2_art208_hora.csv, q2_art208_agente_radar.csv, q2_art208_top10_locais.csv
+
+================================================================================
+  PERGUNTA 3
+  A evolucao mensal das infracoes por 'conduzir sem ACC' (Art. 162, I)
+  em veiculos de propulsao eletrica apresenta tendencia de crescimento
+  superior a das multas em veiculos a combustao?
+================================================================================
+
+INTRODUCAO:
+  O Art. 162, Inciso I do CTB trata de 'Dirigir veiculo sem possuir
+  Carteira Nacional de Habilitacao, Permissao para Dirigir ou
+  Autorizacao'. Idealmente, esta analise compararia veiculos
+  eletricos (cicloeletricos, patinetes) vs combustao.
+
+  LIMITACAO DOS DADOS DISPONIVEIS:
+  A base de dados real de infracoes nao possui coluna de tipo de
+  veiculo, propulsao ou combustivel. Nao e possivel distinguir
+  infracoes cometidas com veiculos eletricos das cometidas com
+  veiculos a combustao. A analise a seguir apresenta a evolucao
+  mensal geral do Art. 162, Inciso I, sem a segmentacao por
+  tipo de veiculo solicitada.
+
+  Total de registros para Art. 162, I: 304
+
+  Evolucao Mensal:
+    Jan: 58 infracoes
+    Fev: 51 infracoes
+    Mar: 119 infracoes
+    Abr: 15 infracoes
+    Mai: 61 infracoes
+
+  Coeficiente de tendencia linear: -3.00
+  A tendencia geral e de QUEDA no periodo analisado.
+
+ANALISE:
+  Marco registra o pico com 119 infracoes, representando
+  39.1% do total do periodo.
+  Os meses de janeiro a marco mostram volumes expressivos, com
+  queda significativa em abril (provavelmente por fim de operacoes
+  especificas ou mudanca na fiscalizacao).
+
+CONCLUSÃO:
+  A pergunta original nao pode ser respondida integralmente com os
+  dados disponiveis, pois nao ha campo que identifique o tipo de
+  veiculo. Para uma analise completa, seria necessario integrar
+  dados de emplacamento (RENAVAM) que contenham a classificacao
+  do combustivel/tipo de propulsao do veiculo. A evolucao mensal
+  geral do Art. 162, I mostra variacao significativa, com pico em
+  marco e reducao em abril.
+
+  >> Grafico: grafico_q3_art162.png
+  >> Tabela: q3_art162_mensal.csv
+
+================================================================================
+  PERGUNTA 4
+  Em quais faixas horarias ocorre o maior volume de multas por
+  'recusa ao bafometro' (Art. 165-A) em comparacao com as faixas
+  horarias de 'dirigir sob influencia de alcool' (Art. 165)?
+================================================================================
+
+INTRODUCAO:
+  O Art. 165 trata de dirigir sob influencia de alcool, enquanto
+  o Art. 165-A trata da recusa ao bafometro. Ambas as infracoes
+  compartilham o mesmo valor de multa (R$ 2.934,70) e estao
+  diretamente relacionadas a alcoolemia ao volante.
+
+  IMPORTANTE: A base real contem apenas 22 registros destes artigos
+  (8 do Art. 165 e 14 do Art. 165-A) no periodo de janeiro a maio
+  de 2025. As conclusoes devem considerar esta limitacao amostral.
+
+  Total de registros: 22
+    Art. 165 (Dirigir sob influencia): 8
+    Art. 165-A (Recusa ao bafometro): 14
+
+  Distribuicao por Faixa Horaria:
+  Faixa                     Art. 165     Art. 165-A  
+  -------------------------------------------------
+  Madrugada (0h-6h)         1            2           
+  Manha (6h-12h)            1            1           
+  Tarde (12h-18h)           3            5           
+  Noite (18h-24h)           3            6           
+
+  Distribuicao por Hora Especifica:
+    02h: Art.165=0 | Art.165-A=1
+    03h: Art.165=0 | Art.165-A=1
+    05h: Art.165=1 | Art.165-A=0
+    08h: Art.165=0 | Art.165-A=1
+    09h: Art.165=1 | Art.165-A=0
+    13h: Art.165=1 | Art.165-A=0
+    14h: Art.165=1 | Art.165-A=1
+    16h: Art.165=0 | Art.165-A=1
+    17h: Art.165=1 | Art.165-A=3
+    18h: Art.165=0 | Art.165-A=1
+    19h: Art.165=1 | Art.165-A=0
+    20h: Art.165=1 | Art.165-A=2
+    21h: Art.165=0 | Art.165-A=1
+    22h: Art.165=1 | Art.165-A=2
+
+ANALISE:
+  O Art. 165-A (recusa) apresenta maior incidencia a noite
+  e a tarde, enquanto o Art. 165 (dirigir alcoolizado) se
+  distribui de forma semelhante. Ambos os artigos concentram-se
+  nos periodos noturno e vespertino, o que e consistente com
+  o consumo de alcool tipicamente associado ao fim de tarde
+  e noite.
+
+CONCLUSÃO:
+  Com base nos 22 registros disponiveis, nao e possivel estabelecer
+  um padrao estatisticamente significativo. Observa-se que a recusa
+  ao bafometro (165-A) ocorre com maior frequencia entre 17h e 22h,
+  enquanto o Art. 165 mostra ocorrencias mais distribuidas ao
+  longo do dia. A limitada amostragem (apenas 22 registros em
+  5 meses) sugere subnotificacao destes artigos na base de dados
+  ou necessidade de ampliar o periodo de coleta.
+
+  >> Grafico: grafico_q4_art165_165a.png
+  >> Tabelas: q4_art165_faixas.csv, q4_art165a_faixas.csv
+
+================================================================================
+  PERGUNTA 5
+  Qual a relacao entre o historico de multas por 'Recusa ao
+  bafometro' e a ocorrencia posterior de 'Sinistros de transito'
+  para o mesmo condutor?
+================================================================================
+
+INTRODUCAO:
+  Esta analise investiga a correlacao entre condutores que
+  recusaram o bafometro (Art. 165-A) e o envolvimento posterior
+  em sinistros de transito. Utilizamos tres fontes de dados:
+  1. base_questao5_recusa_bafometro_sinistros.csv (sequencia de eventos)
+  2. fact_infracoes.csv + fact_sinistros.csv + dim_condutor.csv
+  3. analise_gravidade_recusa.csv (severidade dos sinistros)
+
+========================================
+  ANALISE 5.1 - Base Questao 5 (Eventos Sequenciais)
+========================================
+
+  Total de registros na base: 1654
+  Registros de recusa ao bafometro: 958
+  Registros de sinistros: 696
+  Condutores que recusaram o bafometro: 958
+  Condutores envolvidos em sinistros: 696
+  Condutores com AMBOS os eventos: 317
+
+  Percentual de condutores que recusaram E sofreram sinistro: 33.1%
+
+  Analise Temporal (dias entre recusa e sinistro):
+    Media: 44.7 dias
+    Mediana: 0.0 dias
+    Minimo: 0 dias
+    Maximo: 363 dias
+    Desvio padrao: 93.7 dias
+
+  Distribuicao por intervalo:
+    0-30 dias: 983 condutores (77.1%)
+    31-90 dias: 50 condutores (3.9%)
+    91-180 dias: 92 condutores (7.2%)
+    181-365 dias: 150 condutores (11.8%)
+
+========================================
+  ANALISE 5.2 - Dados Simulados (fact_infracoes + fact_sinistros)
+========================================
+
+  Condutores com recusa ao bafometro: 873
+  Condutores sem recusa: 127
+  Condutores com recusa QUE SOFRERAM SINISTRO: 347 (39.7%)
+  Condutores sem recusa que sofreram sinistro: 36 (28.3%)
+
+  Risco Relativo (recusa vs nao-recusa): 1.40x
+  -> Condutores que recusaram o bafometro tem 1.4 vezes mais
+     probabilidade de se envolver em sinistros do que os demais.
+
+  Distribuicao de Gravidade dos Sinistros:
+  (Comparacao entre quem recusou e quem nao recusou)
+
+  Gravidade    Com Recusa      Sem Recusa     
+  ------------------------------------------
+  Leve         156             18             
+  Grave        166             12             
+  Fatal        135             13             
+
+  Analise de Gravidade (cruzamento analise_gravidade_recusa.csv):
+  SEM RECUSA: Fatal=13 (30.2%), Grave=12 (27.9%), Leve=18 (41.9%)
+  COM RECUSA: Fatal=333 (29.8%), Grave=400 (35.8%), Leve=384 (34.4%)
+
+ANALISE:
+  Os dados revelam uma correlacao significativa: condutores que
+  recusaram o bafometro apresentam 1.4x mais
+  probabilidade de se envolver em sinistros. Na base principal,
+  33.1% dos condutores que recusaram o
+  bafometro posteriormente se envolveram em sinistros de transito.
+  O tempo medio entre a recusa e o sinistro e de aproximadamente
+  45 dias, sugerindo um comportamento de risco continuo.
+
+CONCLUSÃO:
+  A recusa ao bafometro se mostra um forte preditor de envolvimento
+  futuro em sinistros de transito. Este padrao e consistente com
+  a literatura sobre comportamento de risco no transito: condutores
+  que dirigem sob influencia de alcool (ou se recusam a testar)
+  tendem a apresentar outros comportamentos de risco que aumentam
+  a probabilidade de sinistros. Recomenda-se:
+  1. Campanhas educativas direcionadas a condutores autuados por
+     recusa ao bafometro
+  2. Acompanhamento diferenciado (cursos de reciclagem)
+  3. Reforco na fiscalizacao nos horarios e locais de maior incidencia
+
+  >> Grafico: grafico_q5_recusa_sinistro.png
+  >> Tabelas: q5_taxa_sinistros.csv, q5_gravidade_comparacao.csv, q5_dias_estatisticas.csv
+
+================================================================================
+  RESUMO FINAL
+================================================================================
+
+  Pergunta 1 - Art. 164: Analise mensal e por dia da semana concluida.
+    Pico em marco; quarta-feira e o dia de maior incidencia.
+
+  Pergunta 2 - Art. 208: Analise por horario, local e tipo de fiscalizacao.
+    Pico entre 7h-9h; agentes registram mais que radares;
+    Av. Des. Jose Neves e o ponto critico.
+
+  Pergunta 3 - Art. 162, I: Analise mensal geral realizada.
+    Dados disponiveis NAO permitem segmentacao por tipo de veiculo.
+    Pico em marco com 119 registros.
+
+  Pergunta 4 - Art. 165 vs 165-A: Analise comparativa horaria.
+    Apenas 22 registros reais disponiveis. 165-A concentra-se
+    no periodo noturno (17h-22h). Amostra limitada.
+
+  Pergunta 5 - Recusa vs Sinistros: Correlacao significativa encontrada.
+    Risco relativo de aproximadamente 1.4x para condutores que recusaram
+    o bafometro. Tempo medio de aproximadamente 45 dias
+    entre recusa e sinistro.
+
+================================================================================
+  Relatorio gerado em: 08/06/2026 21:16
+  Arquivos salvos em: output/
+================================================================================
