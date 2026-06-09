@@ -59,7 +59,7 @@ python script_analise_bi.py
 
 ## 👥 Grupo
 
-Taísa Santiago · Victor Erbs · Caio Vrasack · Hiram Aguiar · Bruno da Silva
+Taísa Santiago · Victor Erbs · Caio Vrasack · Hiram Aguiar · Bruno da Silva · Bárbara Nolé
 
 ---
 

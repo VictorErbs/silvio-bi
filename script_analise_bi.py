@@ -8,8 +8,8 @@
   dados de infracoes de transito da cidade do Recife/PE, fornecidos
   pela CTTU, respondendo as 5 perguntas do trabalho de BI.
 
-  Autor: Grupo - Taísa Santiago, Victor Erbs, Caio Vrasack,
-         Hiram Aguiar, Bruno da Silva
+   Autor: Grupo - Taísa Santiago, Victor Erbs, Caio Vrasack,
+          Hiram Aguiar, Bruno da Silva, Bárbara Nolé
   Fonte: CTTU / Prefeitura do Recife
 =============================================================================
 """
